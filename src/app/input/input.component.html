@@ -1,0 +1,86 @@
+<section class="container input-container">
+    <form class="input card" (ngSubmit)="onSubmit()" #formRef="ngForm">
+        <div class="row mb-3">
+            <label for="albumTitle" class="col-sm-2 col-form-label">Album Title</label>
+            <div class="col-sm-10">
+                <input type="text" #title="ngModel" class="form-control" id="albumTitle" name="title" required ngModel>
+                <div *ngIf="title.invalid && (title.dirty || title.touched)" class="mt-2">
+                    <div *ngIf="title.errors?.['required']">
+                        <span class="error">Title is required</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-3 checkbox-container">
+            <label for="isCompilation" class="col-md-2 col-form-label">Compilation?</label>
+            <div class="col-md-10">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" #isCompilation="ngModel" name="isCompilation" id="radios1" value="Y" ngModel>
+                    <label class="form-check-label" for="radios1">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" #isCompilation="ngModel" name="isCompilation" id="radios2" value="N" [ngModel]='isCompiliationDefault'>
+                    <label class="form-check-label" for="radios2">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="albumArtist" class="col-sm-2 col-form-label">Album Artist</label>
+            <div class="col-sm-10">
+                <input type="text" #artist="ngModel" class="form-control" id="albumArtist" name="artist" [value]="isCompilation.value == 'Y' ? 'Compilation' : ''" [disabled]="isCompilation.value == 'Y'" required ngModel>
+                <div *ngIf="artist.invalid && (artist.dirty || artist.touched)" class="mt-2">
+                    <div *ngIf="artist.errors?.['required']">
+                        <span class="error">Artist is required</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumYear" class="col-sm-2 col-form-label">Release Year</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumYear" pattern="[0-9]{1,4}" #year="ngModel" name="year" ngModel>
+                <div *ngIf="year.invalid && (year.dirty || year.touched)" class="mt-2">
+                    <div *ngIf="year.errors?.['pattern']">
+                        <span class="error">This field is optional. Enter a valid year (xxxx)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumGenre" class="col-sm-2 col-form-label">Album Genre</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumGenre" name="genre" ngModel>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumGenre" class="col-sm-2 col-form-label moreInfo">
+                Owner <span class="ms-2 badge rounded-pill bg-dark" (click)="togglePopover()">?</span>
+                <app-popover class="ms-2" (closePopover)="togglePopover()" [content]="moreInfoText" *ngIf="moreInfo"></app-popover>
+            </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumOwner" name="owner" ngModel>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumGenre" class="col-sm-2 col-form-label">Image URL</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumImage" name="image" #image="ngModel" ngModel>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-xs-12">
+                <img [src]="image.value" class="img-fluid">
+            </div>
+        </div>
+
+        <button [disabled]="!formRef.valid" type="submit" class="btn btn-primary">Add Record</button>
+
+        <p class="alert alert-success mt-3" role="alert" [@message] *ngIf="formRef.submitted && messageDisplay">This album was added to your collection.</p>
+    </form>
+</section>

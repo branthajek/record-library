@@ -1,0 +1,78 @@
+<div class="backdrop" (click)="onClose()"></div>
+<section class="container edit-container">
+    
+    <form class="input" (ngSubmit)="onSubmit()" #editFormRef="ngForm">
+        <h2 class="mt-2">Edit this Record</h2>
+        <div class="row mb-3">
+            <label for="albumTitle" class="col-sm-2 col-form-label">Album Title</label>
+            <div class="col-sm-10">
+                <input type="text" #editTitle="ngModel" class="form-control" id="albumTitle" name="editTitle" required ngModel>
+            </div>
+        </div>
+
+        <div class="radio row mb-3 checkbox-container">
+            <label for="editIsCompilation" class="col-md-2 col-form-label">Compilation?</label>
+            <div class="col-md-10">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" #editIsCompilation="ngModel" name="editIsCompilation" id="radios1" value="Y" ngModel>
+                    <label class="form-check-label" for="radios1">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" #editIsCompilation="ngModel" name="editIsCompilation" id="radios2" value="N" ngModel>
+                    <label class="form-check-label" for="radios2">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="albumArtist" class="col-sm-2 col-form-label">Album Artist</label>
+            <div class="col-sm-10">
+                <input type="text" #editArtist="ngModel" class="form-control" id="albumArtist" name="editArtist" [value]="editIsCompilation.value == 'Y' ? 'Compilation' : ''" [disabled]="editIsCompilation.value == 'Y'" required ngModel>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumYear" class="col-sm-2 col-form-label">Release Year</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumYear" name="editYear" ngModel>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumGenre" class="col-sm-2 col-form-label">Album Genre</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumGenre" name="editGenre" ngModel>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumGenre" class="col-sm-2 col-form-label">Owner</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumOwner" name="editOwner" ngModel>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="albumGenre" class="col-sm-2 col-form-label">Image URL</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="albumImage" name="editImage" #editImage="ngModel" ngModel>
+            </div>
+        </div>
+
+        <div class="bottom-row">
+            <div class="image">
+                <img [src]="editImage.value" class="img-fluid mb-2">
+            </div>
+            <div class="buttons">
+                <button type="button" class="btn btn-secondary m-3" (click)="onClose()">Cancel</button>
+                <button [disabled]="!editFormRef.valid" type="submit" class="btn btn-primary m-3">Save</button>
+            </div>
+        </div>
+
+        
+
+        <p class="alert alert-danger" role="alert" *ngIf="!editArtist.valid && editArtist.touched || !editTitle.valid && editTitle.touched">Album Title and Artist are required fields.</p>
+        
+        <p class="alert alert-success mt-3" role="alert" *ngIf="editFormRef.submitted && !editFormRef.touched">This album was updated in your collection.</p>
+    </form>
+</section>

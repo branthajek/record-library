@@ -1,0 +1,25 @@
+<div *ngIf="record" class="record">
+    <div class="record-info">
+        <p>Title: {{ record.title }}</p>
+        <p>Artist: {{ record.artist }}</p>
+        <p *ngIf="record.year">Year: {{ record.year }}</p>
+        <p *ngIf="record.genre">Genre: {{ record.genre }}</p>
+        <p *ngIf="record.owner">Owner: {{ record.owner }}</p>
+    </div>
+   
+    <div class="record-image">
+        <img [src]="record.image" class="img-fluid">
+    </div>
+    <div class="record-buttons">
+        <div class="record-buttons__up" *ngIf="index > 0 && customMode">
+            <button type="button" class="btn btn-light m-3" (click)="moveUp()">Move up &#x25B2;</button>
+        </div>
+        <div class="record-buttons-edit">
+            <button type="button" class="btn btn-light m-2" (click)="onEdit()">Edit</button>
+            <button type="button" class="btn btn-light m-2" (click)="onDelete()">Delete</button>
+        </div>
+        <div class="record-buttons__down" *ngIf="index != lastItem && customMode">
+            <button type="button" class="btn btn-light m-3" (click)="moveDown()">Move down &#x25BC;</button>
+        </div>
+    </div>
+</div>

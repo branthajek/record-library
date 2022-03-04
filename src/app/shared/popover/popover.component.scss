@@ -1,0 +1,24 @@
+.popover-container {
+    z-index: 50;
+    position: absolute;
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: .3rem;
+    background: rgb(39, 39, 38);
+    color: white;
+    padding: .2rem;
+    margin: .2rem;
+}
+
+.popover-content {
+    margin: 0 .2rem .2rem;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}

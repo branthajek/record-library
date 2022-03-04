@@ -1,0 +1,31 @@
+.input-container {
+    margin-top: 1rem;
+}
+
+.input {
+    display: flex;
+    background-color: rgb(149, 207, 229, .3);
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.checkbox-container { 
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+} 
+
+.error {
+    color: white;
+    background-color: rgba(241, 51, 25, 0.897);
+    padding: .2rem;
+    border-radius: .3rem;
+}
+
+.moreInfo {
+    display: flex;
+}
+
+button {
+    align-self: flex-end;
+}

@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Record Library</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" (click)="toggleNavbarCollapse()" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [class.collapse]="navbarCollapsed" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/library/input">Add a Record</a></li>
+        <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="/library/sort">Sort Collection</a></li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="!isAuthenticated"><a class="nav-link" routerLink="/auth">Login/Signup</a></li>
+        <li class="nav-item" routerLinkActive="active" *ngIf="isAuthenticated"><a style="cursor: pointer" class="nav-link" (click)="onLogout()">Logout</a></li>
+      </ul>
+      <form class="d-flex" (ngSubmit)="onSubmit()" #formRef="ngForm">
+        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" ngModel>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

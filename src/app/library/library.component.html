@@ -1,0 +1,19 @@
+<router-outlet></router-outlet>
+<section class="container library-container">
+    <h2>Your Record Library</h2>
+
+    <app-edit-record [selectedIndex]="selectedIndex" [selectedRecord]="selectedRecord" *ngIf="editMode"></app-edit-record>
+    
+    <div *ngIf="!isAuthenticated">
+        <p class="alert alert-warning">Warning: anything you add here will be lost. You must first login or sign up to save your collection. Feel free to mess around, though.</p>
+    </div>
+    
+    <app-record [customMode]="customMode" [lastItem]="lastItem" [index]="i" [record]="record" *ngFor="let record of library | filter:searchBy; index as i"></app-record>
+
+    <div *ngIf="library.length === 0 && isAuthenticated">
+        <p class="alert alert-warning">Your library is empty!</p>
+    </div>
+    <div *ngIf="!(library | filter:searchBy).length && searchBy">
+        <p class="alert alert-warning">No results found.</p>
+    </div>
+</section>

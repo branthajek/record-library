@@ -1,0 +1,16 @@
+<section class="container">
+    <form class="sort-container card" (ngSubmit)="onSaveLibrary()" #formRef="ngForm">
+        <div class="row mb-3">
+            <label for="sort" class="col-sm-2 col-form-label">How would you like to sort?</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <div class="input-group-text">By</div>
+                    <select (change)="onSelect(sortBy.value)" #sortBy name="sortBy" class="form-select" id="sort" ngModel>
+                        <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!sorted">Save Library Sorting</button>
+    </form>
+</section>
